@@ -1,0 +1,28 @@
+{
+  "name": "nucleon",
+  "version": "1.0.0",
+  "description": "Level up your messaging game with fun, utility, admin and more commands!",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "type": "commonjs",
+  "keywords": [
+    "nucleon",
+    "revolt",
+    "revolt-bot"
+  ],
+  "author": "Axorax",
+  "license": "MIT",
+  "dependencies": {
+    "@replit/node-fetch": "3.1.0",
+    "@types/node": "18.0.6",
+    "canvas": "2.11.2",
+    "ejs": "3.1.9",
+    "express": "4.18.2",
+    "form-data": "4.0.0",
+    "mathjs": "11.7.0",
+    "mongoose": "7.0.5",
+    "revolt.js": "7.0.0-beta.9"
+  }
+}

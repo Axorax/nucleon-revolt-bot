@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nucleon - Home</title>
+    <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+
+    <%- include('partials/nav.ejs') %>
+
+    <main>
+        <div class="grid_wrapper">
+        <% for (let key in data) { %>
+            <div class="box">
+                <p class="t"><%= data[key] %></p>
+                <p class="b"><%= key %></p>
+            </div>
+        <% } %>
+        </div>
+    </main>
+
+    <style>
+        .grid_wrapper {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            grid-auto-flow: dense;
+            grid-auto-rows: minmax(100px, auto);
+            gap: 1rem;
+        }
+        .box {
+            text-align: center;
+            padding: 2rem;
+            position: relative;
+            padding-bottom: 3rem;
+            word-break: break-all;
+            min-height: 8rem;
+            border: 1px solid #272752;
+            transition: 150ms;
+        }
+
+        .box .b {
+            position: absolute;
+            bottom: 1rem;
+            left: 50%;
+            color: #c1c7f8e4;
+            transform: translate(-50%);
+            line-height: 1.2;
+            word-break: keep-all;
+        }
+        .box .t {
+            line-height: 1.2;
+            font-size: 1.3rem;
+        }
+        .box:hover {
+            cursor: default;
+            .b {
+                color: #fff;
+                opacity: 0.7;
+            }
+            background: #387cf0;
+            border-color: #387cf0;
+        }
+    </style>
+
+    <script src="js/main.js"></script>
+
+</body>
+</html>

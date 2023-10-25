@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nucleon - Database</title>
+    <link href="css/main.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+
+    <%- include('partials/nav.ejs') %>
+    
+    <main>
+        <div class="table">
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Cash</th>
+                        <th>Items</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% users.forEach(user => { %>
+                        <tr>
+                          <td><%= user.id %></td>
+                          <td><%= user.cash %></td>
+                          <td><%= user.items.join(', ') %></td>
+                        </tr>
+                      <% }); %>
+                </tbody>
+            </table>
+        </div>
+    </main>
+
+    <script src="js/main.js"></script>
+</body>
+</html>

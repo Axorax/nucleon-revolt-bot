@@ -1,0 +1,33 @@
+    <div class="nav_mob">Open navigation bar</div>
+
+    <nav>
+        <div class="title">
+            <p>Nucleon Dashboard</p>
+            <button onclick="this.parentNode.parentNode.classList.remove('active')">x</button>
+        </div>
+        <ul class="items">
+            <a href="/home?pin=<%= serverPin %>"><li>Home</li></a>
+            <a href="/dm-user?pin=<%= serverPin %>"><li>DM User</li></a>
+            <a href="/dm-announcement?pin=<%= serverPin %>"><li>DM Announcement</li></a>
+            <a href="/mass-announcement?pin=<%= serverPin %>"><li>Mass Announcement</li></a>
+            <a href="/servers?pin=<%= serverPin %>"><li>Servers</li></a>
+            <a href="/status?pin=<%= serverPin %>"><li>Status</li></a>
+            <a href="/evaluate?pin=<%= serverPin %>"><li>Evaluate</li></a>
+            <a href="/uptime?pin=<%= serverPin %>"><li>Uptime</li></a>
+            <a href="/server-info?pin=<%= serverPin %>"><li>Server Info</li></a>
+            <a href="/actions?pin=<%= serverPin %>"><li>Actions</li></a>
+            <a href="/database?pin=<%= serverPin %>" onclick="nucleon.toast('Loading data...')"><li>Database</li></a>
+            <a href="/database-actions?pin=<%= serverPin %>"><li>Database Actions</li></a>
+            <a href="https://www.patreon.com/axorax" target="_blank"><li>❤️ Donate</li></a>
+        </ul>
+    </nav>
+
+    <script defer>
+        document.querySelector('.nav_mob').addEventListener('click', (e) => {
+            if (document.querySelector('nav').classList.contains('active')) {
+                document.querySelector('nav').classList.remove('active')
+            } else {
+                document.querySelector('nav').classList.add('active')
+            }
+        })
+    </script>

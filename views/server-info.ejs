@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nucleon - Server Info</title>
+    <link href="css/main.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+
+    <%- include('partials/nav.ejs') %>
+    
+    <main class="no-padding">
+        <h2 style="padding: 1rem;padding-bottom: 0.5rem;">Server Information</h2>
+        <ul>
+            <% for (let key in info) { %>
+                <p><strong><%= key %>:</strong> <%= JSON.stringify(info[key], null, 2) %></p>
+            <% } %>
+        </ul>
+    </main>
+
+    <style>
+        ul p {
+            padding: 0.5rem 1rem;
+            cursor: default;
+        }
+        ul p:not(:last-child) {
+            border-bottom: 1px solid #272752;
+        }
+        ul p:hover {
+            background: #130e30;
+        }
+    </style>
+
+    <script src="js/main.js"></script>
+</body>
+</html>

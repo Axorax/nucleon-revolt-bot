@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nucleon - Database Actions</title>
+    <link href="css/main.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+
+    <%- include('partials/nav.ejs') %>
+    
+    <main>
+        <h3>Clear database</h3>
+        <button class="btn sm danger" id="clear-database">Clear entire database</button>
+    </main>
+
+    <script src="js/main.js"></script>
+    <script>
+        document.querySelector('#clear-database').addEventListener('click', () => {
+            fetch('/api/clear-database?pin=' + '<%= serverPin %>').then(res=>res.json()).then(data=>{
+                if(data.success==true) {
+                    nucleon.toast('Cleared database!', 's')
+                }
+            })
+        })
+    </script>
+</body>
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nucleon - Mass Announcement</title>
+    <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+
+    <%- include('partials/nav.ejs') %>
+
+    <main>
+        <div class="layout_1">
+            <div class="wrapper_1">
+                <h1 style="text-align: center;margin-bottom: 2rem;">Message all users and in all channels</h1>
+    
+                <textarea id="message" style="margin-bottom: 1rem; width:100%;min-height: 10rem;" placeholder="Message"></textarea>
+
+                <button id="send" class="w-full btn">Send</button>
+            </div>
+        </div>
+    </main>
+
+    <script src="js/main.js"></script>
+    <script>
+        const textarea = document.querySelector('#message');
+        const button = document.querySelector('#send');
+        const pin = '<%= serverPin %>';
+
+        button.addEventListener('click', () => {
+            const message = textarea.value || ' ';
+            fetch(`/api/mass-announcement?pin=${pin}`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ message })
+            }).then(res=>res.json()).then(data=>{
+                if (data.success == true) {
+                    return nucleon.toast('Mass announcement sent!', 's');
+                } else {
+                    return nucleon.toast('Something went wrong!', 'e');
+                }
+            })
+        })
+    </script>
+    
+</body>
+</html>

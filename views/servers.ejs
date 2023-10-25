@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nucleon - Servers</title>
+    <link href="css/main.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+
+    <%- include('partials/nav.ejs') %>
+    
+    <main>
+        <div class="table">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>ID</th>
+                        <th>Owner</th>
+                        <th>Created At</th>
+                        <th>Description</th>
+                        <th>Discoverable</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% for (let i = 0; i < ids.length; i++) { %>
+                        <tr>
+                            <td><%= names[i] %></td>
+                            <td><%= ids[i] %></td>
+                            <td><%= owners[i] %></td>
+                            <td><%= new Date(createdAt[i]).toLocaleString() %></td>
+                            <td><%= descriptions[i] %></td>
+                            <td><%= discoverable[i] %></td>
+                        </tr>
+                    <% } %>
+                </tbody>
+            </table>
+        </div>
+    </main>
+
+    <style>
+    </style>
+
+    <script src="js/main.js"></script>
+</body>
+</html>

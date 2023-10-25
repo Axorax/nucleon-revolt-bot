@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nucleon - Uptime</title>
+    <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+
+    <%- include('partials/nav.ejs') %>
+
+    <main class="no-padding">
+        <div class="layout_2">
+            <h1>
+                <p class="h"></p>
+                <p class="m"></p>
+                <p class="s"></p>
+            </h1>
+        </div>
+    </main>
+
+    <style>
+        h1 {
+            background-color: #0093E9;
+            background-image: linear-gradient(160deg, #0093E9 0%, #80D0C7 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            word-break: break-all;
+            padding: 1rem;
+            line-height: 1.2;
+            & p {
+                font-size: 3rem;
+            }
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+    </style>
+
+    <script src="js/main.js"></script>
+    <script>
+        setInterval(() => {
+            fetch(`/api/uptime?pin=${'<%= serverPin %>'}`).then(res=>res.json()).then(data=>{
+                const arr = data.uptime.split(', ');
+                document.querySelector('.h').innerText=arr[0];
+                document.querySelector('.m').innerText=arr[1];
+                document.querySelector('.s').innerText=arr[2];
+            })
+        }, 1000)
+    </script>
+</body>
+</html>

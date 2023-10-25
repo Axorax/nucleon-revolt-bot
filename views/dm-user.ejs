@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nucleon - DM User</title>
+    <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+
+    <%- include('partials/nav.ejs') %>
+
+    <main>
+        <div class="layout_1">
+            <div class="wrapper_1">
+                <h1 style="text-align: center;margin-bottom: 2rem;">DM user from bot</h1>
+    
+                <input type="text" class="w-full" id="user-id" style="margin-bottom: 1rem;" placeholder="User ID">
+            
+                <textarea id="message" style="margin-bottom: 1rem; width:100%;min-height: 10rem;" placeholder="Message"></textarea>
+
+                <button id="send" class="w-full btn">Send</button>
+            </div>
+        </div>
+    </main>
+
+    <script src="js/main.js"></script>
+    <script>
+        const id = document.querySelector('#user-id');
+        const textarea = document.querySelector('#message');
+        const button = document.querySelector('#send');
+        const pin = '<%= serverPin %>';
+
+        button.addEventListener('click', () => {
+            if (id.value.replaceAll(' ', '') == '') {
+                return nucleon.toast('ID cannot be empty!', 'e');
+            }
+            const message = textarea.value || ' ';
+            fetch(`/api/dm-user/${id.value}?pin=${pin}`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ message })
+            }).then(res=>res.json()).then(data=>{
+                if (data.success == true) {
+                    return nucleon.toast('Message sent!', 's');
+                } else {
+                    return nucleon.toast('Something went wrong!', 'e');
+                }
+            })
+        })
+    </script>
+    
+</body>
+</html>

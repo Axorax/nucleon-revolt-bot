@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nucleon - Actions</title>
+    <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+
+    <%- include('partials/nav.ejs') %>
+
+    <main>
+        <h3>Basic</h3>
+            <div class="wrapper">
+                <button onclick="action('cache-users')" class="item">
+                    <p class="t">Cache Users</p>
+                </button>
+                <button onclick="action('ws-reconnect');nucleon.toast('Doing... No success message will be sent!', 'i');" class="item">
+                    <p class="t">WS Reconnect</p>
+                </button>
+                <button onclick="lockdown();" class="item">
+                    <p class="t">Lockdown (<span class="lockdown"><%= lockdown || 'off' %></span>)</p>
+                </button>
+            </div>
+
+        <section>
+            <h3>Danger zone!</h3>
+
+            <div class="wrapper">
+                <button onclick="action('shutdown');nucleon.toast('Bot & GUI stopped!', 's');" class="red item">
+                    <p class="t">Shutdown</p>
+                </button>
+            </div>
+        </section>
+    </main>
+
+    <script src="js/main.js"></script>
+    <script>
+        function action(name) {
+            fetch('/actions/' + name + '?pin=' + '<%= serverPin %>').then(res=>res.json()).then(data=>{
+                if(data.success == true) {
+                    nucleon.toast("Action completed!", 's');
+                }
+            })
+        }
+        function lockdown() {
+            fetch('/actions/lockdown' + '?pin=' + '<%= serverPin %>').then(res=>res.json()).then(data=>{
+                if(data.success == true) {
+                    nucleon.toast("Action completed!", 's');
+                    document.querySelector('.lockdown').innerText = data.lockdown ? "on" : "off";
+                }
+            })
+        }
+    </script>
+    <style>
+        h3 {
+            margin-bottom: 0.4rem;
+        }
+        section {
+            margin: 2rem 0 0 0;
+        }
+        .wrapper {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            grid-auto-flow: dense;
+            grid-auto-rows: minmax(100px, auto);
+            gap: 1rem;
+        }
+        .item {
+            background: transparent;
+            text-align: center;
+            padding: 2rem;
+            position: relative;
+            word-break: break-all;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 8rem;
+            border: 1px solid #272752;
+            transition: 150ms;
+            cursor: pointer;
+        }
+
+        .item .t {
+            line-height: 1.2;
+            font-size: 1.3rem;
+        }
+        .item:hover {
+            .b {
+                color: #fff;
+                opacity: 0.7;
+            }
+            background: #387cf0;
+            border-color: #387cf0;
+        }
+        .item.red:hover {
+            background: #FC2947!important;
+            border-color: #FC2947!important;
+        }
+    </style>
+
+</body>
+</html>
